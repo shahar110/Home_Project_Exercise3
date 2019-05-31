@@ -798,3 +798,4 @@ void inheritenceTest(Hospital& hospital)
 	rd2.printArticleList();
 	cout << endl;
 }
+//commit test
