@@ -6,36 +6,21 @@ Hospital::Hospital(const string& name)
 {
 	setName(name);
 
-	departmentArr = new Department*[physDepartmentsArr];
-	patientArr = new Patient*[physPatientArr];
+	//departmentArr = new Department*[physDepartmentsArr];
+	//patientArr = new Patient*[physPatientArr];
 }
 
 Hospital::~Hospital()
 {
-	delete[]departmentArr;
-	delete[]patientArr;
+	//delete[]departmentArr;
+	//delete[]patientArr;
 }
 
 void Hospital::addDepartment(const string& departmentName)
 {
-	if (physDepartmentsArr == numOfDepartments) {
-		physDepartmentsArr *= 2;
-
-		Department** temp = new Department*[numOfDepartments];
-		for (int i = 0; i < numOfDepartments; i++)
-			temp[i] = departmentArr[i];
-
-		delete[]departmentArr;
-
-		departmentArr = new Department*[physDepartmentsArr];
-		for (int i = 0; i < numOfDepartments; i++)
-			departmentArr[i] = temp[i];
-
-		delete[]temp;
-	}
-
-	//Add the new Department to the Hospital Departments array
-	departmentArr[numOfDepartments] = new Department(departmentName);
+	
+	Department* newDepartment = new Department(departmentName);
+	departmentArr.push_back(newDepartment);
 	numOfDepartments++;
 }
 
@@ -44,7 +29,7 @@ int Hospital::getNumOfDepartments() const
 	return numOfDepartments;
 }
 
-Department** Hospital::getDeparmentsArr()
+vector<Department*> Hospital::getDeparmentsArr()
 {
 	return departmentArr;
 }
@@ -143,33 +128,28 @@ vector<Doctor*> Hospital::getDoctorsArr()
 
 void Hospital::addPatient(const string& patientName, int patientId, int birthYear, eGender patientGender, int depratmentIndex)
 {
-		if (physPatientArr == numOfPatients) {
-			physPatientArr *= 2;
+	Patient* newPatient = new Patient(patientName, patientId, birthYear, patientGender);
+	patientArr.push_back(newPatient);
 
-			Patient** temp = new Patient*[numOfPatients];
-			for (int i = 0; i < numOfPatients; i++)
-				temp[i] = patientArr[i];
-
-			delete[]patientArr;
-
-			patientArr = new Patient*[physPatientArr];
-			for (int i = 0; i < numOfPatients; i++)
-				patientArr[i] = temp[i];
-
-			delete[]temp;
-		}
-
-		//Add the new Patient to the Hospital Patients array
-		patientArr[numOfPatients] = new Patient(patientName, patientId, birthYear, patientGender);
-
-		//Add the pointer to the Patient the his department Patients pointers arr
-		departmentArr[depratmentIndex]->addPatient(patientArr[numOfPatients]);
-		//Save the department index for the Patient (for later use)
-		patientArr[numOfPatients]->setDepartmentIndex(numOfPatients);
-
-		numOfPatients++;
+	//Add the pointer to the Doctor the his department Doctors pointers arr
+	//departmentArr[depratmentIndex]->addDoctor(*(doctorsArr.end() - 1));
+	//Save the department index for the Patient (for later use)
+	//patientArr[numOfPatients]->setDepartmentIndex(numOfPatients);
+	*(departmentArr[depratmentIndex]) += *(patientArr.end() - 1);
+	numOfPatients++;
 }
-
+////void Hospital::changePatientDepartment(int patientId, int newDepartmentIndex)
+//{
+//	// taking details of patient
+//	int oldPatientIndex, hisOldDepartemnt;
+//	 oldPatientIndex = findPatientIndex(patientId);
+//	 hisOldDepartemnt = patientArr[oldPatientIndex]->getDepartmentIndex();
+//	// adding to the new department
+//	 departmentArr[newDepartmentIndex]->getAllPatients().push_back(patientArr[oldPatientIndex]);
+//
+//	 // deleting from old department
+//	 departmentArr[hisOldDepartemnt]->getAllPatients()[patientArr[oldPatientIndex]->getDepartmentPatientArrIndex()] = nullptr;
+//}
 void Hospital::changePatientDepartment(int patientId, int newDepartmentIndex)
 {
 	int patientIndex, oldDepartmentIndex, oldPatientArrIndex;
@@ -181,9 +161,9 @@ void Hospital::changePatientDepartment(int patientId, int newDepartmentIndex)
 
 	int sizeToEnd = departmentArr[oldDepartmentIndex]->getNumOfPatients();
 	int i;
-	for (i = oldPatientArrIndex ; i < sizeToEnd ; i++)
+	for (i = oldPatientArrIndex; i < sizeToEnd; i++)
 	{
-		departmentArr[oldDepartmentIndex]->getAllPatients()[i] = departmentArr[oldDepartmentIndex]->getAllPatients()[i+1];
+		departmentArr[oldDepartmentIndex]->getAllPatients()[i] = departmentArr[oldDepartmentIndex]->getAllPatients()[i + 1];
 		int numOfPatients = departmentArr[oldDepartmentIndex]->getNumOfPatients();
 		departmentArr[oldDepartmentIndex]->setNumOfPatients(numOfPatients - 1);
 	}
@@ -198,7 +178,7 @@ int Hospital::getNumOfPatients() const
 	return numOfPatients;
 }
 
-Patient** Hospital::getPatientsArr()
+vector<Patient*> Hospital::getPatientsArr()
 {
 	return patientArr;
 }
@@ -268,3 +248,4 @@ bool Hospital::setName(const string& newName)
 	name = newName;
 	return true;
 }
+

@@ -14,7 +14,7 @@ private:
 	string name;
 	vector<Doctor*> allDoctors;
 	vector<Nurse*> allNurses;
-	Patient** allPatients;
+	vector<Patient*> allPatients;
 
 	int numOfPatients = 0;
 	int physPatientsArr = 2;
@@ -34,7 +34,7 @@ public:
 	int getNumOfDoctors() const;
 	vector<Nurse*> getAllNurses();
 	int getNumOfNurses() const;
-	Patient** getAllPatients();
+	vector<Patient*> getAllPatients();
 	int getNumOfPatients() const;
 
 	const string& selectStaffMember(int* staffMemberNum);
@@ -44,6 +44,8 @@ public:
 	void printPatientsList() const;
 	bool operator+=(Doctor* newDoctor);
 	bool operator+=(Nurse* newNurse);
+	bool operator+=(Patient* newPatient);
+	
 };
 
 #endif

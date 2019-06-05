@@ -6,8 +6,6 @@ Patient::Patient(const string& name, int id, int birthYear, eGender gender)
 	setId(id);
 	setBirthYear(birthYear);
 	setGender(gender);
-
-	visitsArr = new VisitForm*[physVisitArr];
 }
 
 bool Patient::setName(const string& newName) throw (PatientNameException)
@@ -45,25 +43,9 @@ bool Patient::setGender(eGender newGender)
 
 bool Patient::addVisit(const Date& arrivalDate, int purpose, int therapistNum, const string& therapistName, const string& departmentName)
 {
-	if (physVisitArr == visitHistoryCounter) {
-		physVisitArr *= 2;
-
-		VisitForm** temp = new VisitForm*[visitHistoryCounter];
-		for (int i = 0; i < visitHistoryCounter; i++)
-			temp[i] = visitsArr[i];
-
-		delete[]visitsArr;
-
-		visitsArr = new VisitForm*[physVisitArr];
-		for (int i = 0; i < visitHistoryCounter; i++)
-			visitsArr[i] = temp[i];
-
-		delete[]temp;
-	}
-
 	//Add the new Visit Form to the Patient visits array
 	if (purpose == CHECK) {
-		visitsArr[visitHistoryCounter] = new VisitForm(arrivalDate, purpose, therapistNum, therapistName, departmentName);
+		visitsArr.push_back(new VisitForm(arrivalDate, purpose, therapistNum, therapistName, departmentName));
 	}
 	else {
 		int isFasting, roomNum;
@@ -71,7 +53,7 @@ bool Patient::addVisit(const Date& arrivalDate, int purpose, int therapistNum, c
 		cin >> isFasting;
 		cout << "Enter room number : " << endl;
 		cin >> roomNum;
-		visitsArr[visitHistoryCounter] = new surgeryVisitation(arrivalDate, purpose, therapistNum, therapistName, departmentName,roomNum, isFasting);
+		visitsArr.push_back(new surgeryVisitation(arrivalDate, purpose, therapistNum, therapistName, departmentName,roomNum, isFasting));
 	}
 	visitHistoryCounter++;
 	return true;
@@ -105,7 +87,7 @@ eGender Patient::getGender() const
 	return gender;
 }
 
-VisitForm** Patient::getVisitsArr() const
+vector<VisitForm*> Patient::getVisitsArr() const
 {
 	return visitsArr;
 }

@@ -18,10 +18,10 @@ class Hospital
 {
 private:
 	string name;
-	Department** departmentArr;
+	vector<Department*> departmentArr;
 	vector<Doctor*> doctorsArr;
 	vector<Nurse*> nursesArr;
-	Patient** patientArr;
+	vector<Patient*> patientArr;
 	vector<Researcher*> researchersArr;
 
 	int numOfDepartments = 0;
@@ -46,7 +46,7 @@ public:
 
 	void addDepartment(const string& departmentName);
 	int getNumOfDepartments() const;
-	Department** getDeparmentsArr();
+	vector<Department*> getDeparmentsArr();
 
 	void addNurse(const string& nurseName, int years, int depratmentIndex);
 	int getNumOfNurses() const;
@@ -59,7 +59,7 @@ public:
 
 	void addPatient(const string& patientName, int patientId, int birthYear, eGender patientGender, int depratmentIndex);
 	int getNumOfPatients() const;
-	Patient** getPatientsArr();
+	vector<Patient*> getPatientsArr();
 	int findPatientIndex(int id);
 	void changePatientDepartment(int patientId, int newDepartmentIndex);
 
@@ -68,6 +68,7 @@ public:
 	vector<Researcher*> getResearchersArr();
 
 	void addResearchDoctor(const string& doctorName, const string& expertise, int depratmentIndex);
+	
 };
 
 #endif;

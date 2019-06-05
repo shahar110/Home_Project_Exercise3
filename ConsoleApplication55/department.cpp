@@ -6,13 +6,12 @@ using namespace std;
 Department::Department(const string& departmentName)
 {
 	setName(departmentName);
-	allPatients = new Patient*[physPatientsArr];
 }
 
-//////     Don't forget to remove
+
 Department::~Department()
 {
-	delete[]allPatients;
+	//delete[]allPatients;
 }
 
 bool Department::setName(const string& departmentName)
@@ -35,26 +34,9 @@ bool Department::addDoctor(Doctor* newDoctor)
 
 bool Department::addPatient(Patient* newPatient)
 {
-	if (physPatientsArr == numOfPatients) {
-		physPatientsArr *= 2;
-
-		Patient** temp = new Patient*[numOfPatients];
-		for (int i = 0; i < numOfPatients; i++)
-			temp[i] = allPatients[i];
-
-		delete[]allPatients;
-
-		allPatients = new Patient*[physPatientsArr];
-		for (int i = 0; i < numOfPatients; i++)
-			allPatients[i] = temp[i];
-
-		delete[]temp;
-	}
-	//Add the patient to the department patients array
-	allPatients[numOfPatients] = newPatient;
+	allPatients.push_back(newPatient);
 	//Save the array index for the patient (for later use)
 	allPatients[numOfPatients]->setDepartmentPatientArrIndex(numOfPatients);
-
 	numOfPatients++;
 	return true;
 }
@@ -132,7 +114,7 @@ vector<Nurse*> Department::getAllNurses()
 	return allNurses;
 }
 
-Patient** Department::getAllPatients()
+vector<Patient*> Department::getAllPatients()
 {
 	return allPatients;
 }
@@ -171,8 +153,8 @@ void Department::printDepartment() const
 		cout << endl;
 	}
 
-	cout << "List of Patients in the department (" << numOfPatients << "): " << endl;
-	for (i = 0; i < numOfPatients; i++) {
+	cout << "List of Patients in the department (" << allPatients.size() << "): " << endl;
+	for (i = 0; i < allPatients.size(); i++) {
 		allPatients[i]->printPatient();
 		cout << endl;
 	}
@@ -184,16 +166,12 @@ void Department::printPatientsList() const
 {
 	cout << "Printing Patients list for department " << name << ":" << endl;
 
-	for (int i = 0; i < numOfPatients; i++)
+	for (int i = 0; i < allPatients.size(); i++)
 	{
-		if (allPatients[i]!=nullptr)
-		{
 			allPatients[i]->printPatient();
 			cout << endl;
 			allPatients[i]->printCurrentVisit();
 			cout << "\n\n";
-		}
-
 	}
 	cout << "--------------------------------------------------------" << endl;
 }
@@ -233,5 +211,10 @@ bool Department::operator+=(Doctor* newDoctor)
 bool Department::operator+=(Nurse* newNurse)  
 {
 	addNurse(newNurse);
+	return true;
+}
+bool Department::operator+=(Patient* newPatient)
+{
+	addPatient(newPatient);
 	return true;
 }

@@ -8,7 +8,7 @@ using namespace std;
 #include "VisitationForm.h"
 #include "surgeryVisitation.h"
 #include "PatientException.h"
-
+#include <vector>
 enum eGender {Male, Female};
 namespace { const char* genders[] = { "Male", "Female" }; }
 
@@ -19,9 +19,9 @@ private:
 	int id;
 	int birthYear;
 	eGender gender;
-	
+	vector<VisitForm*> visitsArr;
 
-	VisitForm** visitsArr;
+
 	int visitHistoryCounter = 0;
 	int physVisitArr = 2;
 
@@ -43,7 +43,7 @@ public:
 	int getId() const;
 	int getBirthYear() const;
 	eGender getGender() const;
-	VisitForm** getVisitsArr() const;
+	vector<VisitForm*> getVisitsArr() const;
 	int getDepartmentPatientArrIndex() const;
 	int getDepartmentIndex() const;
 	int getVisitCounter() const;
