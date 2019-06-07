@@ -102,11 +102,6 @@ int Patient::getDepartmentPatientArrIndex() const
 	return departmentPatientArrIndex;
 }
 
-//Department* Patient::getDepartment(int *departmentIndex) const
-//{
-//	*departmentIndex = departmentPatientIndex;
-//	return department;
-//}
 
 int Patient::getVisitCounter() const
 {

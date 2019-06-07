@@ -5,15 +5,10 @@ int Hospital::employeeCounter = 0;
 Hospital::Hospital(const string& name) 
 {
 	setName(name);
-
-	//departmentArr = new Department*[physDepartmentsArr];
-	//patientArr = new Patient*[physPatientArr];
 }
 
 Hospital::~Hospital()
 {
-	//delete[]departmentArr;
-	//delete[]patientArr;
 }
 
 void Hospital::addDepartment(const string& departmentName)
@@ -130,26 +125,10 @@ void Hospital::addPatient(const string& patientName, int patientId, int birthYea
 {
 	Patient* newPatient = new Patient(patientName, patientId, birthYear, patientGender);
 	patientArr.push_back(newPatient);
-
-	//Add the pointer to the Doctor the his department Doctors pointers arr
-	//departmentArr[depratmentIndex]->addDoctor(*(doctorsArr.end() - 1));
-	//Save the department index for the Patient (for later use)
-	//patientArr[numOfPatients]->setDepartmentIndex(numOfPatients);
 	*(departmentArr[depratmentIndex]) += *(patientArr.end() - 1);
 	numOfPatients++;
 }
-////void Hospital::changePatientDepartment(int patientId, int newDepartmentIndex)
-//{
-//	// taking details of patient
-//	int oldPatientIndex, hisOldDepartemnt;
-//	 oldPatientIndex = findPatientIndex(patientId);
-//	 hisOldDepartemnt = patientArr[oldPatientIndex]->getDepartmentIndex();
-//	// adding to the new department
-//	 departmentArr[newDepartmentIndex]->getAllPatients().push_back(patientArr[oldPatientIndex]);
-//
-//	 // deleting from old department
-//	 departmentArr[hisOldDepartemnt]->getAllPatients()[patientArr[oldPatientIndex]->getDepartmentPatientArrIndex()] = nullptr;
-//}
+
 void Hospital::changePatientDepartment(int patientId, int newDepartmentIndex)
 {
 	int patientIndex, oldDepartmentIndex, oldPatientArrIndex;
@@ -222,9 +201,6 @@ void Hospital::addResearchDoctor(const string& doctorName, const string& experti
 {
 	try
 	{
-		//Add the new Doctor to the Hospital Doctors array
-		//doctorsArr[numOfDoctors] = new ResearchDoctor(doctorName, expertise);
-		//researchersArr[numOfResearchers] = (ResearchDoctor*) doctorsArr[numOfDoctors];
 
 		ResearchDoctor* rs = new ResearchDoctor(doctorName, expertise);
 		doctorsArr.push_back(rs);

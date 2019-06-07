@@ -12,7 +12,7 @@ class Array
 	char delimiter;
 	T* arr;
 public:
-	Array(int size = 10, char delimiter = ' ');
+	Array(int size = 10);
 	Array(const Array& other);
 	~Array();
 	

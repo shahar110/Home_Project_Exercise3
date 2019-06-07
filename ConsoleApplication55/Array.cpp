@@ -2,7 +2,7 @@
 
 
 template<class T>
-Array<T>::Array(int maxSize, char delimiter) : physicalSize(maxSize), logicalSize(0), delimiter(delimiter)
+Array<T>::Array(int maxSize) : physicalSize(maxSize), logicalSize(0)
 {
 	arr = new T[physicalSize];
 }
@@ -26,7 +26,6 @@ const Array<T>& Array<T>::operator=(const Array<T>& other)
 		delete[]arr;
 		physicalSize = other.physicalSize;
 		logicalSize = other.logicalSize;
-		delimiter = other.delimiter;
 		arr = new T[physicalSize];
 		for (int i = 0; i < logicalSize; i++)
 			arr[i] = other.arr[i];

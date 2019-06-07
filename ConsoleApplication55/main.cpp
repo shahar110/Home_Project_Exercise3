@@ -13,8 +13,9 @@ using namespace std;
 #include "hospital.h"
 #include "date.h"
 
-#define PURPOSE_LENGTH 200
 
+#define PURPOSE_LENGTH 200
+#define TEMPLATE_SIZE 10
 void addDepartment(Hospital& hospital);
 void addNurse(Hospital& hospital);
 void addDoctor(Hospital& hospital);
@@ -32,6 +33,7 @@ int departmentSelect(Hospital& t);
 void test(Hospital& hospital);
 void researcherTest(Hospital& hospital);
 void inheritenceTest(Hospital& hospital);
+void arrayClassTest(Hospital& hospital);
 
 void main()
 {
@@ -735,29 +737,12 @@ void test(Hospital& hospital)
 	Date d1(29, 7, 1991), d2(12, 03, 1957);
 
 	((ResearchDoctor*)hospital.getDoctorsArr()[2])->addArticle("News", "Time Magazine", d1);
-	//hospital.getResearchersArr()[0]->addArticle("Sports", "New York Times", d1);
-	//hospital.getResearchersArr()[0]->addArticle("Science", "Washingtone Post", d2);
-	//hospital.getResearchersArr()[1]->addArticle("Entertinment", "The Economist", d1);
-	//hospital.getResearchersArr()[2]->addArticle("Technological", "PC Magazine", d2);
 
 	hospital.addPatient("Amos", 1111, 1980, Male, 0);
 	hospital.addPatient("Gilad", 2222, 1981, Male, 0);
 	hospital.addPatient("Sarit", 3333, 1982, Female, 1);
 	hospital.addPatient("Tehila", 4444, 1983, Female, 1);
 
-	//hospital.getPatientsArr()[0]->addVisit(d1, "Purpose 1", 1, "Simon", "Pnimit A");
-	//hospital.getPatientsArr()[1]->addVisit(d1, "Purpose 2", 2, "Gurfunkel", "Pnimit A");
-	//hospital.getPatientsArr()[2]->addVisit(d1, "Purpose 3", 3, "Sharon", "Pnimit B");
-	//hospital.getPatientsArr()[3]->addVisit(d1, "Purpose 4", 4, "Adi", "Pnimit B");
-
-	//for (int i = 0; i < 3; i++)
-	//{
-	//	hospital.getPatientsArr()[i]->printPatient();
-	//	cout << endl;
-	//	currentVisit = hospital.getPatientsArr()[i]->getVisitCounter() - 1;
-	//	hospital.getPatientsArr()[i]->getVisitsArr()[currentVisit]->printVisitForm();
-	//	cout << endl;
-	//}
 }
 
 void researcherTest(Hospital& hospital)
@@ -798,4 +783,3 @@ void inheritenceTest(Hospital& hospital)
 	rd2.printArticleList();
 	cout << endl;
 }
-//commit test
