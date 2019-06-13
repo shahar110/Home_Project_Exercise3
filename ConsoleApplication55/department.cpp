@@ -111,7 +111,7 @@ void Department::setNumOfDoctors(int num)
 	numOfDoctors = num;
 }
 
-vector<Doctor*> Department::getAllDoctors()
+vector<Doctor*>& Department::getAllDoctors()
 {
 	return allDoctors;
 }

@@ -33,7 +33,7 @@ public:
 	bool setNumOfPatients(int num);
 	void setNumOfDoctors(int num);
 	const string& getName() const { return name; };
-	vector<Doctor*> getAllDoctors();
+	vector<Doctor*>& getAllDoctors();
 	int getNumOfDoctors() const;
 	vector<Nurse*> getAllNurses();
 	int getNumOfNurses() const;
