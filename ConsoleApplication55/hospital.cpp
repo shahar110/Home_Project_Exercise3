@@ -27,7 +27,7 @@ void Hospital::loadingFromFile()
 	for (int i = 0; i < numOfDoctors; i++)
 	{
 		Doctor *d = nullptr;
-		char type[10];
+		char type[20];
 		int tmpIndex;
 		inFile >> type;
 		inFile >> tmpIndex;
