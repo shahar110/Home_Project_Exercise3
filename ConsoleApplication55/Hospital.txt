@@ -6,6 +6,6 @@ PnimitB
 PnimitC
 1
 3
-Doctor 0 Nati Naama
-SurgeonDoctor 1 Dor Yasmin 123
-ResearchDoctor 2 Yudo Hadar
+Doctor 0 Nati Nati
+SurgeonDoctor 1 Yudi Yudi 123
+ResearchDoctor 2 Dor Dor

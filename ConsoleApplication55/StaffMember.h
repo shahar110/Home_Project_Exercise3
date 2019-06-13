@@ -15,13 +15,14 @@ class StaffMember
 {
 protected:
 	string name;
-	static int employeeNumCounter;
+	
 	int employeeNum;
 	int depIndex;
 public:
+	static int employeeNumCounter;
 	StaffMember() { ; }
 	StaffMember(const string& name);
-
+	void setEmployeeNum(int num) { employeeNum = num; }
 	bool setName(const string& name);
 	const string& getName() const;
 	StaffMember(ifstream& in);

@@ -24,7 +24,8 @@ void Hospital::loadingFromFile()
 	}
 	inFile >> numOfDoctors;
 	cout << numOfDoctors << endl;
-	for (int i = 0; i < numOfDoctors; i++)
+	int i;
+	for (i = 0; i < numOfDoctors; i++)
 	{
 		Doctor *d = nullptr;
 		char type[20];
@@ -37,10 +38,14 @@ void Hospital::loadingFromFile()
 			 d = new SurgeonDoctor(inFile);
 		else if (strcmp(type, typeid(ResearchDoctor).name() + 6) == 0)
 			 d = new ResearchDoctor(inFile);
-
+		d->setEmployeeNum(i);
+		d->employeeNumCounter++;
 		departmentArr[tmpIndex]->getAllDoctors().push_back(d);
 		doctorsArr.push_back(d);
 	}
+	
+	employeeCounter = i;
+	
 	//for (int i = 0; i < numOfDoctors; i++)
 	//{
 	//	Doctor* d = new Doctor(inFile);
