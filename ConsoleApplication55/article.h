@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include "date.h"
+#include <fstream>
 #include "ArticleException.h"
 using namespace std;
 
@@ -18,7 +19,7 @@ private:
 
 public:
 	Article(string articleName, string magazineName, const Date& date);
-
+	Article(ifstream& in);
 	bool setArticleName(string articleName);
 	bool setMagazineName(string magazineName);
 	bool setDate(const Date& newDate);
@@ -28,6 +29,7 @@ public:
 	Date getDate() const;
 
 	void print() const;
+
 };
 
 #endif // !1

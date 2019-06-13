@@ -6,11 +6,10 @@
 #include <string>
 #include "date.h"
 #include "VisitationException.h"
+#include <fstream>
 using namespace std;
 
 const int CHECK = 1;
-//enum ePurpose { Treatment, Medicine ,Emergency, Visit, Reception };
-//namespace { const char* visitPurpose[] = { "Treatment", "Medicine", "Emergency", "Visit", "Reception" }; }
 
 class VisitForm
 {
@@ -32,7 +31,6 @@ public:
 	bool setTherapist(int therapistNum, const string& therapistName);
 	bool setDepartmentName(const string& newDepartment);
 	bool setDepartmentIndex(int index);
-
 	Date getDate() const;
 	int getPurpose() const;
 	int getTherapist() const;

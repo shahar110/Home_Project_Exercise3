@@ -43,3 +43,17 @@ void Article::print() const
 		<< "    , at ";
 	publishDate.printDate();
 }
+
+
+
+Article::Article(ifstream& in) : publishDate(in)
+{
+	int nameLengt, magazineLength;
+	//input article name
+	in.read((char*)&nameLengt, sizeof(nameLengt));
+	in.read((char*)&articleName, nameLengt);
+
+	//input magazine name
+	in.read((char*)&magazineLength, sizeof(magazineLength));
+	in.read((char*)&magazineName, magazineLength);
+}

@@ -15,7 +15,7 @@ protected:
 	
 public:
 	Researcher(const string& name);
-
+	Researcher(ifstream&);
 	bool operator<(const Researcher& r) const;
 	bool operator>(const Researcher& r) const;
 	bool operator==(const Researcher& r) const;

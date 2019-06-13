@@ -3,6 +3,10 @@
 Researcher::Researcher(const string& name) : StaffMember(name) 
 {
 }
+Researcher::Researcher(ifstream& in) : StaffMember(in)
+{
+
+}
 
 bool Researcher::operator<(const Researcher & r) const
 {

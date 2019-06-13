@@ -10,11 +10,11 @@ protected:
 	int numOfSurgeries;
 public:
 	SurgeonDoctor(const string& name, const string& expetise, int numOfSurgeries);
-
+	SurgeonDoctor(ifstream&);
 	bool setNumOfSurgeries(int numOfSurgeries);
 
 	int getNumOfSurgeries() const;
-
+	void save(ofstream&) const override;
 	void print() const;
 };
 

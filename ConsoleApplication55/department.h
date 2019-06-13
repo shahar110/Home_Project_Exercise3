@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <fstream>
 class Department
 {
 private:
@@ -19,8 +19,11 @@ private:
 	int numOfPatients = 0;
 	int physPatientsArr = 2;
 
+	int numOfDoctors = 0;
+
 public:
 	Department(const string& departmentName);
+	Department(ifstream& in);
 	~Department();
 
 	bool setName(const string& departmentName);
@@ -28,7 +31,7 @@ public:
 	bool addNurse(Nurse* newNurse);
 	bool addPatient(Patient* newPatient);
 	bool setNumOfPatients(int num);
-
+	void setNumOfDoctors(int num);
 	const string& getName() const { return name; };
 	vector<Doctor*> getAllDoctors();
 	int getNumOfDoctors() const;
@@ -46,6 +49,19 @@ public:
 	bool operator+=(Nurse* newNurse);
 	bool operator+=(Patient* newPatient);
 	
+	friend ostream& operator <<(ostream& out, const Department& department)
+	{
+		out << department.name;
+		return out;
+	}
+
+	friend istream& operator >> (istream& in, Department& department)
+	{
+		char temp[128];
+		in.getline(temp, 128);
+		in >> department.name;
+		return in;
+	}
 };
 
 #endif

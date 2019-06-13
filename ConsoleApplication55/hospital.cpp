@@ -5,10 +5,82 @@ int Hospital::employeeCounter = 0;
 Hospital::Hospital(const string& name) 
 {
 	setName(name);
+	loadingFromFile();
+
 }
 
+void Hospital::loadingFromFile()
+{
+	/* changing to files*/
+	int numOfDocs = 0;
+	ifstream inFile("Hospital.txt");
+	inFile >> numOfDepartments;
+	for (int i = 0; i < numOfDepartments; i++)
+	{
+		Department* newDepartment = new Department(inFile);
+		departmentArr.push_back(newDepartment);
+		inFile >> numOfDocs;
+		departmentArr[i]->setNumOfDoctors(numOfDocs);
+	}
+	inFile >> numOfDoctors;
+	cout << numOfDoctors << endl;
+	for (int i = 0; i < numOfDoctors; i++)
+	{
+		Doctor *d = nullptr;
+		char type[10];
+		int tmpIndex;
+		inFile >> type;
+		inFile >> tmpIndex;
+		if (strcmp(type, typeid(Doctor).name() + 6) == 0)
+			 d = new Doctor(inFile);
+		else if (strcmp(type, typeid(SurgeonDoctor).name() + 6) == 0)
+			 d = new SurgeonDoctor(inFile);
+		else if (strcmp(type, typeid(ResearchDoctor).name() + 6) == 0)
+			 d = new ResearchDoctor(inFile);
+
+		departmentArr[tmpIndex]->getAllDoctors().push_back(d);
+		doctorsArr.push_back(d);
+	}
+	//for (int i = 0; i < numOfDoctors; i++)
+	//{
+	//	Doctor* d = new Doctor(inFile);
+	//	*(departmentArr[d->getIndex()]) += d;
+	//	doctorsArr.push_back(d);
+	//}
+	inFile.close();
+}
+/*
+How we save ? 
+Num of all departments 
+name of specific department
+amount of doctors 
+names of them
+amount of nurses 
+names of them
+*/
+void Hospital::saveToFile()
+{
+	ofstream outFile("Hospital.txt", ios::trunc);
+	outFile << numOfDepartments << endl;
+	for (int i = 0; i < numOfDepartments; i++)
+	{
+		outFile << departmentArr[i]->getName() << endl;
+		outFile << departmentArr[i]->getNumOfDoctors() << endl;
+	}
+	// saving doctors also
+	outFile << doctorsArr.size() << endl;
+	for (int j = 0; j < doctorsArr.size() ; j++)
+	{
+		outFile << typeid(*doctorsArr[j]).name() + 6 << " " << doctorsArr[j]->getIndex() << " " << doctorsArr[j]->getName() << " " << doctorsArr[j]->getExpertise();
+		if (strcmp(typeid(*doctorsArr[j]).name(), typeid(SurgeonDoctor).name()) == 0)
+			outFile << " " << ((SurgeonDoctor*)doctorsArr[j])->getNumOfSurgeries();
+		outFile << endl;
+	}
+}
 Hospital::~Hospital()
 {
+	saveToFile();
+	
 }
 
 void Hospital::addDepartment(const string& departmentName)
@@ -35,6 +107,7 @@ void Hospital::addNurse(const string& nurseName, int years, int depratmentIndex)
 	{
 		//Add the new Nurse to the Hospital Nurses array
 		Nurse* n = new Nurse(nurseName, years);
+		n->setIndex(depratmentIndex);
 		nursesArr.push_back(n);
 
 		//Add the pointer to the Nurse to the her department Nurses pointers arr
@@ -68,6 +141,7 @@ void Hospital::addDoctor(const string& doctorName, const string& expertise, int 
 	{
 		//Add the new Doctor to the Hospital Doctors array
 		Doctor* d = new Doctor(doctorName, expertise);
+		d->setIndex(depratmentIndex);
 		doctorsArr.push_back(d);
 
 		//Add the pointer to the Doctor the his department Doctors pointers arr
@@ -92,6 +166,7 @@ void Hospital::addSurgeon(const string& doctorName, const string& expertise, int
 	{
 		//Add the new Doctor to the Hospital Doctors array
 		Doctor* s = new SurgeonDoctor(doctorName, expertise, numOfSurgeries);
+		s->setIndex(depratmentIndex);
 		doctorsArr.push_back(s);
 
 		//Add the pointer to the Doctor the his department Doctors pointers arr
@@ -203,11 +278,13 @@ void Hospital::addResearchDoctor(const string& doctorName, const string& experti
 	{
 
 		ResearchDoctor* rs = new ResearchDoctor(doctorName, expertise);
+		rs->setIndex(depratmentIndex);
 		doctorsArr.push_back(rs);
 		researchersArr.push_back(rs);
 
 		//Add the pointer to the Doctor the his department Doctors pointers arr
 		departmentArr[depratmentIndex]->addDoctor(*(doctorsArr.end() - 1));
+		
 	}
 	catch (DoctorExperException& e)
 	{

@@ -7,6 +7,8 @@ StaffMember::StaffMember(const string& newName)
 	employeeNumCounter++;
 	employeeNum = employeeNumCounter;
 	setName(newName);
+	depIndex = -1;
+
 }
 
 bool StaffMember::setName(const string& tmpName) throw (StaffMemberNameException)
@@ -26,4 +28,18 @@ const string& StaffMember::getName() const
 int StaffMember::getEmployeeNum() const
 {
 	return employeeNum;
+}
+StaffMember::StaffMember(ifstream& in)
+{
+	char temp[10];
+	in >> name;
+}
+void StaffMember::save(ofstream& out) const
+{
+	out << name;
+}
+void StaffMember::saveType(ofstream& outFile) const
+{
+	StaffGenerator::StaffType type = StaffGenerator::GetType(this);
+	outFile << &type;
 }

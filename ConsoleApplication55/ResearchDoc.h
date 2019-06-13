@@ -9,7 +9,9 @@ class ResearchDoctor : public Doctor, public Researcher
 {
 public:
 	ResearchDoctor(const string& name, const string& expertise);
+	ResearchDoctor(ifstream&);
 
+	void save(ofstream&) const override;
 };
 
 #endif;

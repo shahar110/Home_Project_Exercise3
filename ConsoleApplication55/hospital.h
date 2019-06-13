@@ -68,7 +68,8 @@ public:
 	vector<Researcher*> getResearchersArr();
 
 	void addResearchDoctor(const string& doctorName, const string& expertise, int depratmentIndex);
-	
+	void saveToFile();
+	void loadingFromFile();
 };
 
 #endif;

@@ -8,6 +8,10 @@ Department::Department(const string& departmentName)
 	setName(departmentName);
 }
 
+Department::Department(ifstream& in)
+{
+	in >> *this;
+}
 
 Department::~Department()
 {
@@ -102,7 +106,10 @@ bool Department::setNumOfPatients(int num)
 	return true;
 }
 
-
+void Department::setNumOfDoctors(int num)
+{
+	numOfDoctors = num;
+}
 
 vector<Doctor*> Department::getAllDoctors()
 {

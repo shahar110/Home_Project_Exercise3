@@ -5,7 +5,7 @@
 #include <iostream>
 #include <string>
 #include "DateException.h"
-
+#include <fstream>
 using namespace std;
 
 class Date
@@ -17,11 +17,11 @@ private:
 	
 public:
 	Date(int day, int month, int year);
-
+	Date(ifstream &);
 	bool setDay(int newDay);
 	bool setMonth(int newMonth);
 	bool setYear(int newYear);
-
+	void save(ofstream &);
 	void printDate() const;
 	friend ostream& operator<<(ostream& os, const Date &d)
 	{

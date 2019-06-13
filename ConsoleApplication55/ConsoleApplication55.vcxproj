@@ -157,6 +157,7 @@
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="ResearchDoc.cpp" />
     <ClCompile Include="researcher.cpp" />
+    <ClCompile Include="StaffGenerator.cpp" />
     <ClCompile Include="StaffMember.cpp" />
     <ClCompile Include="SurgeonDoc.cpp" />
     <ClCompile Include="surgeryVisitation.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="PatientException.h" />
     <ClInclude Include="ResearchDoc.h" />
     <ClInclude Include="researcher.h" />
+    <ClInclude Include="StaffGenerator.h" />
     <ClInclude Include="StaffMember.h" />
     <ClInclude Include="StaffMemberException.h" />
     <ClInclude Include="SurgeonDoc.h" />

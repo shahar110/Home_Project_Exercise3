@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+
 #include <string>
 using namespace std;
 
@@ -40,6 +41,7 @@ void main()
 	Hospital hospital("Academic Hospital");
 	int option = 0;
 	cout << "Hello and welcome to Tel-Aviv Academic College Hospital!\n" << endl;
+
 	while (option != -1)
 	{
 		cout << "Please select one of the following options:" << endl;

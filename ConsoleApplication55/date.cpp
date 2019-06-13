@@ -39,4 +39,13 @@ void Date::printDate() const
 	cout << day << "/" << month << "/" << year;
 }
 
-;
+Date::Date(ifstream &in)
+{
+	in.read((char*)this, sizeof(*this));
+
+}
+
+void Date::save(ofstream &out)
+{
+	out.write((const char*)this, sizeof(*this));
+}

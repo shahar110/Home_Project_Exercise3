@@ -1,0 +1,11 @@
+3
+PnimitA
+1
+PnimitB
+1
+PnimitC
+1
+3
+Doctor 0 Nati Naama
+SurgeonDoctor 1 Dor Yasmin 123
+ResearchDoctor 2 Yudo Hadar
